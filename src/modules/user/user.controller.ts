@@ -8,6 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UserService } from './user.service';
+import { createUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -18,14 +19,12 @@ export class UsersController {
     return this.userService.getUser(username);
   }
 
-  @Post('/users')
-  createUser(
-    @Body() body: { username: string; email: string; password: string },
-  ) {
+  @Post('/')
+  createUser(@Body() body: createUserDto) {
     return this.userService.createUser(body);
   }
 
-  @Patch('/users/:username')
+  @Patch('/:username')
   updateUser(
     @Body() body: { username: string; email: string; password: string },
   ) {
